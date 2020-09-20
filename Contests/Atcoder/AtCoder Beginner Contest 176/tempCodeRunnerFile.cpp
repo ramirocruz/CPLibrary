@@ -1,37 +1,35 @@
 #include<bits/stdc++.h>
 using namespace std;
-bool comp(pair<int,int> &a,pair<int,int>&b)
-{
-    if(a.first == b.first)
-    return a.second < b.second;
-    return a.first < b.first;
-}
+pair<int,int>items[300001];
+int Hcount[300001]={0},Wcount[300001]={0};
 int main()
 {
 ios_base::sync_with_stdio(false);
 cin.tie(NULL);
 //freopen("input.txt","r",stdin);
 //freopen("output.txt","w",stdout);
-int n;
-cin>>n;
-vector<pair<int,int>> ar(n);
-int a,b;
-for(int i=0;i<n;i++)
-{
-    cin>>a>>b;
-    ar[0]={a,b};
-}
-sort(ar.begin(),ar.end(),comp);
-int count =0;
-for(int i=0,j=0;i<n && j<n;j++)
-{  
-     if(ar[i].second <= ar[j].first)
-      {
-          i++;
-          count++;
-      }
-}
-cout<<count<<endl;
 
+int  H,W,M;
+cin>>H>>W>>M;
+set<long long> present;
+
+for(int i=0;i<M;i++)
+{
+   cin>>items[i].first>>items[i].second;
+}
+
+for(int i=0;i<M;i++)
+{
+    Hcount[items[i].first - 1]++;
+    Wcount[items[i].second - 1]++;
+    present.insert((long long)((items[i].first -1) + (long long)(items[i].second -1) * H));
+}
+int posH = max_element(Hcount,Hcount+H) - Hcount;
+int posW = max_element(Wcount,Wcount+W) - Wcount;
+
+int  ans = Hcount[posH] + Wcount[posW];
+if(present.find(posH + (long long)posW * H) != present.end())
+ ans--;
+cout<<ans<<endl;
 return 0;
 }
