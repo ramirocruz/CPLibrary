@@ -1,24 +1,26 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-bool iscyclic(int node,vector<bool>&instack,pair<int,int>&ans,vector<int>&parent,vector<vector<int>>&graph,vector<bool>&visited)
+bool iscyclic(int node,pair<int,int>&ans,vector<int>&parent,vector<vector<int>>&graph,vector<short>&visited)
 {
-    visited[node] = true;
-    instack[node] = true;
+    visited[node] = 1;
     for (auto &u:graph[node])
     {
-        if(visited[u] && instack[u])
+        if(visited[u] == 1 && parent[node] != u)
         {
             ans = {u,node};
             return true;
         }
-        parent[u]=node;
-        bool stat = iscyclic(u,instack,ans,parent,graph,visited);
-        if(stat)
-            return true;        
+        
+        if(!visited[u])
+        {   
+            parent[u]=node;
+            if(iscyclic(u,ans,parent,graph,visited))
+                return true;
+        }                
 
     }
-    instack[node] = false;
+    visited[node] = 2;
     return false;
 }
 int main()
@@ -28,53 +30,51 @@ cin.tie(NULL);
 int n,m;
 cin>>n>>m;
 vector<vector<int>>graph(n);
-vector<bool>instack(n);
 for(int i=0;i<m;i++)
 {
     int u,v;
     cin>>u>>v;
-    graph[u-1].push_back(v-1);   
+    graph[u-1].push_back(v-1);
+    graph[v-1].push_back(u-1);   
 }
-vector<bool>visited(n);
+vector<short>visited(n);
 vector<int>parent(n,-1);
 pair<int,int>ans;
 bool flag=false;
-for(auto &x:graph)
-{
-    for(auto el:x)
-        cout<<el<<" ";
-    cout<<endl;
-}
+
 for(int i=0;i<n;i++)
 {
     if(!visited[i])
     {
-        if(iscyclic(i,instack,ans,parent,graph,visited))
-            {
-                flag = true;
-                break;
-            }
+
+        if(iscyclic(i,ans,parent,graph,visited))
+        {
+            flag = true;            
+            break;
+        }
     }
 }
+
 if(flag)
 {
-    int beg =ans.first;
+    int start = ans.first;
     int end = ans.second;
-    stack<int>st;
-    st.push(end);
-    st.push(beg);
-    while(beg != end)
+    stack<int> res;
+    res.push(start);
+    res.push(end);
+    while (end != start)
     {
-        beg = parent[beg];
-        st.push(beg);       
+        end = parent[end];
+        res.push(end);
     }
-    cout<<st.size()<<endl;
-    while(st.size())
+    cout<<res.size()<<endl;
+    while(res.size())
     {
-        cout<<st.top()<<" ";
-        st.pop();
+        cout<<res.top()+1<<" ";
+        res.pop();
     }
     cout<<endl;
+    
 }
 else
 {
