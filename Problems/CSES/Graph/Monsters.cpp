@@ -35,10 +35,8 @@ inline char getpath(pair<int,int>&a,pair<int,int>&b)
         }
     }
 }
-int main()
+void solve()
 {
-ios_base::sync_with_stdio(false);
-cin.tie(NULL);
 int n,m;
 cin>>n>>m;
 vector<string> g(n);
@@ -61,7 +59,7 @@ for(int i=0;i<n;i++)
             dist[i][j] = INT_MIN;
             vis[i][j] = true;
         }
-        else if(g[i][j]=='M')
+        else if(g[i][j]=='R')
         {
             Q.push({i,j});
             visited[i][j] = true;
@@ -109,7 +107,7 @@ while (Q.size())
 // }
 queue<array<int,3>> q;
 q.push({start.first,start.second,0});
-vector<vector<pair<int,int>>> PATH(n,vector<pair<int,int>>(m));
+// vector<vector<pair<int,int>>> PATH(n,vector<pair<int,int>>(m));
 int ans = -1;
 pair<int,int>end;
 while (q.size())
@@ -132,7 +130,7 @@ while (q.size())
         {
             q.push({x,y,f[2]+1});
             vis[x][y] = true;
-            PATH[x][y] = {f[0],f[1]};
+            // PATH[x][y] = {f[0],f[1]};
         }
     }
 
@@ -141,20 +139,20 @@ label:;
 
 if(ans!=-1)
 {
-    vector<char>res;
-    while (end != start)
-    {
-        auto temp = PATH[end.first][end.second];
-        res.push_back(getpath(end,temp));
-        end = temp;
-    }
-    reverse(res.begin(),res.end());
+    // vector<char>res;
+    // while (end != start)
+    // {
+    //     auto temp = PATH[end.first][end.second];
+    //     res.push_back(getpath(end,temp));
+    //     end = temp;
+    // }
+    // reverse(res.begin(),res.end());
 
     cout<<"YES\n";
     cout<<ans<<endl;
-    for(auto &x:res)
-        cout<<x;
-    cout<<endl;   
+    // for(auto &x:res)
+    //     cout<<x;
+    // cout<<endl;   
 
 
 }
@@ -162,6 +160,4 @@ else
 {
     cout<<"NO\n";
 }
-
-return 0;
 }

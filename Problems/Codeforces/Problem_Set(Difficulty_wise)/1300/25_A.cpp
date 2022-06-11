@@ -1,6 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
-
+//https://codeforces.com/problemset/problem/25/A
 int main()
 {
 
@@ -11,6 +11,7 @@ cin.tie(NULL);
 freopen("D:\\Study\\CPLibrary\\IO\\input.txt","r",stdin);
 freopen("D:\\Study\\CPLibrary\\IO\\output.txt","w",stdout);
 #endif 
+
 
 return 0;
 }

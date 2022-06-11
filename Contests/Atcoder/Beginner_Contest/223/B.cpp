@@ -11,6 +11,16 @@ cin.tie(NULL);
 freopen("D:\\Study\\CPLibrary\\IO\\input.txt","r",stdin);
 freopen("D:\\Study\\CPLibrary\\IO\\output.txt","w",stdout);
 #endif 
-
+string s;
+cin >> s;
+set<string>st;
+int n = s.size();
+for(int i=0;i<n;i++)
+{
+    st.insert(s);
+    s = s.back() + s.substr(0,n-1);
+}
+cout << *st.begin() << endl;
+cout << *st.rbegin() << endl;
 return 0;
 }

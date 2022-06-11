@@ -1,6 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
-
+    
 int main()
 {
 
@@ -12,5 +12,8 @@ freopen("D:\\Study\\CPLibrary\\IO\\input.txt","r",stdin);
 freopen("D:\\Study\\CPLibrary\\IO\\output.txt","w",stdout);
 #endif 
 
+int a,b;
+cin >> a >> b;
+cout << (a^b) <<endl;
 return 0;
 }

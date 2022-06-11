@@ -11,6 +11,12 @@ cin.tie(NULL);
 freopen("D:\\Study\\CPLibrary\\IO\\input.txt","r",stdin);
 freopen("D:\\Study\\CPLibrary\\IO\\output.txt","w",stdout);
 #endif 
-
+string tbm = "Hello,World!";
+string res;
+cin >> res;
+if(tbm == res)
+    cout << "AC\n";
+else
+    cout << "WA\n";
 return 0;
 }

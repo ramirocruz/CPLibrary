@@ -12,5 +12,7 @@ freopen("D:\\Study\\CPLibrary\\IO\\input.txt","r",stdin);
 freopen("D:\\Study\\CPLibrary\\IO\\output.txt","w",stdout);
 #endif 
 
+cout << "Hello World\n";
+cout << "How are you meme\n";
 return 0;
 }
